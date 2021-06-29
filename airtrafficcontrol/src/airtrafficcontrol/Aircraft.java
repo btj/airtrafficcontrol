@@ -13,10 +13,15 @@ public class Aircraft {
 	 * @invar | atc != null
 	 * @invar | atc.controlledAircraft.contains(this)
 	 * @invar | 0 <= speed
+	 * 
+	 * @peerObject
 	 */
 	ATC atc;
 	int speed;
 	
+	/**
+	 * @peerObject
+	 */
 	public ATC getATC() { return atc; }
 	
 	public int getSpeed() { return speed; }

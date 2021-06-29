@@ -11,15 +11,29 @@ public class Aircraft {
 
 	/**
 	 * @invar | atc != null
-	 * @invar | atc.controlledAircraft.contains(this)
 	 * @invar | 0 <= speed
 	 */
-	ATC atc;
-	int speed;
+	private ATC atc;
+	private int speed;
 	
-	public ATC getATC() { return atc; }
+	/**
+	 * @invar | getATCInternal().getControlledAircraftInternal(). contains(this)
+	 * 
+	 * @post | result != null
+	 * @peerObject (package-level)
+	 */
+	ATC getATCInternal() { return atc; }
+	/**
+	 * @post | 0 <= result
+	 */
+	int getSpeedInternal() { return speed; }
 	
-	public int getSpeed() { return speed; }
+	/**
+	 * @peerObject
+	 */
+	public ATC getATC() { return getATCInternal(); }
+	
+	public int getSpeed() { return getSpeedInternal(); }
 	
 	/**
 	 * @throws IllegalArgumentException | atc == null
@@ -32,7 +46,7 @@ public class Aircraft {
 		if (atc == null)
 			throw new IllegalArgumentException("`atc` is null");
 		this.atc = atc;
-		atc.controlledAircraft.add(this);
+		atc.addControlledAircraft(this);
 	}
 	
 	/**
@@ -55,9 +69,9 @@ public class Aircraft {
 	 *       |     atc.getControlledAircraft().equals(LogicalSet.plus(old(atc.getControlledAircraft()), this))
 	 */
 	public void transferTo(ATC atc) {
-		this.atc.controlledAircraft.remove(this);
+		this.atc.removeControlledAircraft(this);
 		this.atc = atc;
-		atc.controlledAircraft.add(this);
+		atc.addControlledAircraft(this);
 	}
 
 }

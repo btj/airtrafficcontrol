@@ -8,9 +8,14 @@ public class AirportATC extends ATC {
 	/**
 	 * @invar | 1 <= nbGates
 	 */
-	final int nbGates;
+	private final int nbGates;
 	
-	public int getNbGates() { return nbGates; }
+	/**
+	 * @post | 1 <= result
+	 */
+	int getNbGatesInternal() { return nbGates; }
+	
+	public int getNbGates() { return getNbGatesInternal(); }
 
 	/**
 	 * @post | getControlledAircraft().isEmpty()
